@@ -6,11 +6,16 @@ let username;
 const repositoriesPerPageSelector = document.getElementById(
   "repositoriesPerPage"
 );
-repositoriesPerPageSelector.addEventListener("change", () => {
-  repositoriesPerPage = parseInt(repositoriesPerPageSelector.value);
-  currentPage = 1; // Reset current page when changing repositories per page
-  fetchRepositories(currentPage);
-});
+
+if (repositoriesPerPageSelector) {
+  repositoriesPerPageSelector.addEventListener("change", () => {
+    repositoriesPerPage = parseInt(repositoriesPerPageSelector.value);
+    currentPage = 1; // Reset current page when changing repositories per page
+    fetchRepositories(currentPage, username);
+  });
+} else {
+  console.error("Unable to find element with id 'repositoriesPerPage'");
+}
 
 // Modify the searchRepositories function to use the input value
 async function searchUser() {
