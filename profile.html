@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>GitHub Repositories Page</title>
+  </head>
+
+  <body>
+    <header>
+      <h1 class="heading">GitHub Repositories</h1>
+    </header>
+    <label for="repositoriesPerPage" class="PerPage">Repositories per page:</label>
+    <select id="repositoriesPerPage" onchange="updateRepositoriesPerPage()">
+      <option value="10" selected>10</option>
+      <option value="20">20</option>
+      <option value="50">50</option>
+      <option value="100">100</option>
+    </select>
+    <input
+      type="text"
+      id="usernameInput"
+      placeholder="Search Username"
+      required
+      value="kajal8512" />
+    <button class="searcUser" onclick="searchUser()">
+      Search User
+    </button>
+    <div id="main-container">
+      <div id="user-profile">
+        <!-- User profile information goes here -->
+        <img id="user-avatar" src="" alt="User Avatar" />
+        <div id="user-info">
+          <h2 id="user-name"></h2>
+          <h4 id="user-location"></h4>
+          <h4 id="user-email"></h4>
+          <h4 id="user-repos"></h4>
+        </div>
+      </div>
+      <main id="repositories-container">
+        <!-- Repositories will be displayed here -->
+      </main>
+    </div>
+    <div id="pagination-controls">
+      <button id="previous-page">Prev</button>
+      <ul id="pagination-list"></ul>
+      <button id="next-page">Next</button>
+    </div>
+    <div id="loader" class="hidden">
+      <div class="spinner"></div>
+    </div>
+    <script src="repo.js"></script>
+  </body>
+</html>
