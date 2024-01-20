@@ -1,6 +1,7 @@
 let repositoriesPerPage = 10; // Default value
 let currentPage = 1;
 const loader = document.getElementById("loader");
+let username;
 
 const repositoriesPerPageSelector = document.getElementById(
   "repositoriesPerPage"
@@ -15,7 +16,6 @@ repositoriesPerPageSelector.addEventListener("change", () => {
 async function searchUser() {
   const usernameInput = document.getElementById("usernameInput");
   const username = usernameInput.value.trim();
-  console.log(username, "searching... line 55");
   if (username === "") {
     alert("Please enter a GitHub username.");
     return;
@@ -78,7 +78,6 @@ function displayRepositories(repositories) {
 async function fetchRepositories(page, username) {
   loader.style.display = "block";
 
-  console.log(page, username, "fetching... line 107");
   try {
     let apiUrlForUser = `https://api.github.com/users/${username}/repos`;
 
@@ -155,20 +154,16 @@ function updatePagination(totalRepositories) {
   document
     .getElementById("previous-page")
     .addEventListener("click", async () => {
-      console.log(currentPage);
       if (currentPage > 1) {
         currentPage -= 1; // Update currentPage before fetching the previous page
-        await fetchRepositories(currentPage);
+        await fetchRepositories(currentPage, username);
       }
     });
 
   document.getElementById("next-page").addEventListener("click", async () => {
-    console.log(currentPage, totalPages);
     if (currentPage < totalPages) {
       currentPage += 1;
-      console.log(currentPage, "next...");
-      await fetchRepositories(currentPage);
-      console.log(currentPage, "next");
+      await fetchRepositories(currentPage, username);
     }
   });
 }
@@ -178,9 +173,10 @@ window.onload = function () {
   const initialUsername = initialUsernameInput.value.trim();
 
   if (initialUsername) {
+    username = initialUsername;
     searchUser();
   }
 };
 
 // Initial fetch on page load
-fetchRepositories(currentPage);
+fetchRepositories(currentPage, username);
