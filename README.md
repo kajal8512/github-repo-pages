@@ -8,7 +8,7 @@ This web application allows users to search for a GitHub username and view a pag
 - **Display User Profile:** Show the user's avatar and name based on the entered GitHub username.
 
 ## Technologies Used
-- **HTML
-- **CSS
-- **JavaScript
-- **GitHub REST API
+- HTML
+- CSS
+- JavaScript
+- GitHub REST API
